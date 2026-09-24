@@ -1,0 +1,61 @@
+{
+  "caseId": "dicom-geometry-bench",
+  "title": "DICOM 体系标定台：切片几何、FrameOfReference 与序列多解",
+  "narrative": "医学影像研究组导入去标识的 DICOM metadata 与像素文件，按空间几何组成可复核的 series/volume 候选。",
+  "coordinateBasis": "DICOM 患者坐标系（LPS），单位 mm；基准由 FrameOfReferenceUID 标识",
+  "stages": [
+    {
+      "id": "stage-0-baseline",
+      "kind": "import",
+      "label": "初始导入：基线序列 A（8 片，InstanceNumber 已打乱）",
+      "files": [
+        "baseline/inst-01.json",
+        "baseline/inst-02.json",
+        "baseline/inst-03.json",
+        "baseline/inst-04.json",
+        "baseline/inst-05.json",
+        "baseline/inst-06.json",
+        "baseline/inst-07.json",
+        "baseline/inst-08.json"
+      ]
+    },
+    {
+      "id": "stage-1-variants",
+      "kind": "import",
+      "label": "触发边界组合：非正交/重片/间距跳变/多帧/UID冲突/缺几何/TS不支持",
+      "files": [
+        "variants/non-orthogonal.json",
+        "variants/duplicate-position.json",
+        "variants/spacing-jump-01.json",
+        "variants/spacing-jump-02.json",
+        "variants/spacing-jump-03.json",
+        "variants/spacing-jump-04.json",
+        "variants/multiframe.json",
+        "variants/uid-conflict.json",
+        "variants/missing-geometry.json",
+        "variants/unsupported-ts.json"
+      ]
+    },
+    {
+      "id": "stage-2-param",
+      "kind": "paramRevision",
+      "label": "参数修订：方向正交容差 0.001 → 0.3",
+      "params": {
+        "orthogonalityTolerance": 0.3
+      }
+    },
+    {
+      "id": "stage-3-amend",
+      "kind": "import",
+      "label": "局部源数据改动：修正序列 B 末片位置 12.5 → 7.5",
+      "files": [
+        "amendments/spacing-jump-04-v2.json"
+      ]
+    },
+    {
+      "id": "stage-4-adjudicate",
+      "kind": "manual",
+      "label": "人工裁定：对候选做接受/否定（可在两个窗口制造版本冲突）"
+    }
+  ]
+}

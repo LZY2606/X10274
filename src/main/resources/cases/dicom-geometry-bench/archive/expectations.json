@@ -1,0 +1,81 @@
+{
+  "principles": [
+    "InstanceNumber 不当空间排序真值",
+    "方向向量先检查正交与容差",
+    "局部间距变化、重片和不同 FrameOfReference 产生分支而不强合"
+  ],
+  "diagnostics": [
+    {
+      "file": "variants/non-orthogonal.json",
+      "code": "NON_ORTHOGONAL",
+      "stage": "stage-1-variants"
+    },
+    {
+      "file": "variants/duplicate-position.json",
+      "code": "DUPLICATE_POSITION",
+      "stage": "stage-1-variants"
+    },
+    {
+      "file": "variants/spacing-jump-04.json",
+      "code": "SPACING_JUMP",
+      "stage": "stage-1-variants"
+    },
+    {
+      "file": "variants/multiframe.json",
+      "code": "MULTI_FRAME_EXPANDED",
+      "stage": "stage-1-variants"
+    },
+    {
+      "file": "variants/uid-conflict.json",
+      "code": "UID_CONFLICT",
+      "stage": "stage-1-variants"
+    },
+    {
+      "file": "variants/missing-geometry.json",
+      "code": "MISSING_GEOMETRY",
+      "stage": "stage-1-variants"
+    },
+    {
+      "file": "variants/unsupported-ts.json",
+      "code": "UNSUPPORTED_TRANSFER_SYNTAX",
+      "stage": "stage-1-variants"
+    }
+  ],
+  "invalidation": [
+    {
+      "stage": "stage-2-param",
+      "affectedPartitions": [
+        "1.2.826.0.1.3680043.9.7433.10|1.2.826.0.1.3680043.9.7433.1000"
+      ],
+      "unaffectedPartitions": [
+        "1.2.826.0.1.3680043.9.7433.20|1.2.826.0.1.3680043.9.7433.1000",
+        "1.2.826.0.1.3680043.9.7433.30|1.2.826.0.1.3680043.9.7433.1000",
+        "1.2.826.0.1.3680043.9.7433.40|1.2.826.0.1.3680043.9.7433.1000"
+      ]
+    },
+    {
+      "stage": "stage-3-amend",
+      "affectedPartitions": [
+        "1.2.826.0.1.3680043.9.7433.20|1.2.826.0.1.3680043.9.7433.1000"
+      ],
+      "unaffectedPartitions": [
+        "1.2.826.0.1.3680043.9.7433.10|1.2.826.0.1.3680043.9.7433.1000",
+        "1.2.826.0.1.3680043.9.7433.30|1.2.826.0.1.3680043.9.7433.1000"
+      ]
+    }
+  ],
+  "baselineOrder": {
+    "partition": "1.2.826.0.1.3680043.9.7433.10|1.2.826.0.1.3680043.9.7433.1000",
+    "projectionCoordinatesMm": [
+      0.0,
+      2.5,
+      5.0,
+      7.5,
+      10.0,
+      12.5,
+      15.0,
+      17.5
+    ],
+    "note": "按投影坐标排序；InstanceNumber [7,2,8,1,5,3,6,4] 不得作为排序真值"
+  }
+}
