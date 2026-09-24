@@ -1,0 +1,174 @@
+{
+ "caseId": "dicom-geometry-calibration-bench",
+ "title": "DICOM 体系标定台: 切片几何、FrameOfReference 与序列多解",
+ "coordinateBasis": "DICOM Patient Coordinate System (LPS), unit mm",
+ "rulesetV1": {
+  "orthTol": 0.001,
+  "unitTol": 0.01,
+  "dupTolMm": 0.001,
+  "jumpTolMm": 0.25
+ },
+ "cases": [
+  {
+   "id": "baseline",
+   "dir": "baseline",
+   "title": "基线: 8 张等间距轴位切片",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 1,
+    "medianSpacingMm": 1.0,
+    "events": []
+   }
+  },
+  {
+   "id": "nonorthogonal",
+   "dir": "nonorthogonal",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 1,
+    "events": [
+     "NON_ORTHOGONAL_ORIENTATION"
+    ]
+   }
+  },
+  {
+   "id": "duplicate-position",
+   "dir": "duplicate-position",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 2,
+    "events": [
+     "DUPLICATE_POSITION"
+    ]
+   }
+  },
+  {
+   "id": "spacing-jump",
+   "dir": "spacing-jump",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 3,
+    "events": [
+     "LOCAL_SPACING_JUMP"
+    ]
+   }
+  },
+  {
+   "id": "multiframe",
+   "dir": "multiframe",
+   "expect": {
+    "slices": 6,
+    "candidateVariants": 1,
+    "events": [],
+    "multiFrame": true
+   }
+  },
+  {
+   "id": "uid-conflict",
+   "dir": "uid-conflict",
+   "expect": {
+    "slices": 9,
+    "candidateVariants": 1,
+    "events": [
+     "UID_CONFLICT"
+    ]
+   }
+  },
+  {
+   "id": "missing-geometry",
+   "dir": "missing-geometry",
+   "expect": {
+    "slices": 7,
+    "candidateVariants": 1,
+    "events": [
+     "MISSING_GEOMETRY"
+    ]
+   }
+  },
+  {
+   "id": "unsupported-transfer-syntax",
+   "dir": "unsupported-transfer-syntax",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 1,
+    "events": [
+     "TRANSFER_SYNTAX_UNSUPPORTED"
+    ]
+   }
+  },
+  {
+   "id": "frame-of-reference-split",
+   "dir": "frame-of-reference-split",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 2,
+    "events": [
+     "FRAME_OF_REFERENCE_SPLIT"
+    ]
+   }
+  },
+  {
+   "id": "instance-number-scrambled",
+   "dir": "instance-number-scrambled",
+   "expect": {
+    "slices": 8,
+    "candidateVariants": 1,
+    "events": [
+     "INSTANCE_NUMBER_NOT_SPATIAL_TRUTH"
+    ]
+   }
+  }
+ ],
+ "replay": [
+  {
+   "step": 1,
+   "action": "importCase",
+   "caseId": "baseline",
+   "expectCandidates": 1
+  },
+  {
+   "step": 2,
+   "action": "decide",
+   "caseId": "baseline",
+   "decision": "accepted"
+  },
+  {
+   "step": 3,
+   "action": "importCase",
+   "caseId": "spacing-jump",
+   "expectCandidates": 3
+  },
+  {
+   "step": 4,
+   "action": "reviseParams",
+   "jumpTolMm": 0.9,
+   "expectInvalidatedOnly": [
+    "spacing-jump"
+   ]
+  },
+  {
+   "step": 5,
+   "action": "amendSource",
+   "caseId": "baseline",
+   "dir": "amend-baseline",
+   "expectInvalidatedOnly": [
+    "baseline"
+   ]
+  },
+  {
+   "step": 6,
+   "action": "conflictingDecisions",
+   "caseIdA": "baseline",
+   "caseIdB": "spacing-jump"
+  },
+  {
+   "step": 7,
+   "action": "forkAtHistoryEvent"
+  },
+  {
+   "step": 8,
+   "action": "exportDeleteReimport",
+   "expect": "identity-order-provenance-preserved"
+  }
+ ]
+}
