@@ -1,0 +1,56 @@
+{
+  "case": "dicom-geometry-bench",
+  "steps": [
+    {
+      "step": "import-baseline",
+      "source": "baseline"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/nonorthogonal-orientation",
+      "scenario": "nonorthogonal-orientation"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/duplicate-position",
+      "scenario": "duplicate-position"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/spacing-jump",
+      "scenario": "spacing-jump"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/multiframe-object",
+      "scenario": "multiframe-object"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/uid-conflict",
+      "scenario": "uid-conflict"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/missing-geometry",
+      "scenario": "missing-geometry"
+    },
+    {
+      "step": "import-counterexample",
+      "source": "counterexamples/unsupported-transfer-syntax",
+      "scenario": "unsupported-transfer-syntax"
+    },
+    {
+      "step": "revise-rules",
+      "source": "revisions/rules-v2.json"
+    },
+    {
+      "step": "patch-source-local",
+      "source": "revisions/source-patch-local"
+    },
+    {
+      "step": "conflicting-decisions",
+      "source": "revisions/decisions-conflict.json"
+    }
+  ]
+}

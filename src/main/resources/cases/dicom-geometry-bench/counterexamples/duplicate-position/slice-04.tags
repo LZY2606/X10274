@@ -1,0 +1,14 @@
+# DICOM tag dump (de-identified), research export
+(0002,0010) TransferSyntaxUID = 1.2.840.10008.1.2.1
+(0008,0018) SOPInstanceUID = 1.2.826.0.1.3680043.9.7433.30.4
+(0020,000D) StudyInstanceUID = 1.2.826.0.1.3680043.9.7433.40.1
+(0020,000E) SeriesInstanceUID = 1.2.826.0.1.3680043.9.7433.10.1
+(0020,0052) FrameOfReferenceUID = 1.2.826.0.1.3680043.9.7433.20.1
+(0020,0032) ImagePositionPatient = -126.5625\-126.5625\4.0  # mm, LPS patient basis
+(0020,0037) ImageOrientationPatient = 1\0\0\0\1\0  # row\col direction cosines
+(0028,0030) PixelSpacing = 0.703125\0.703125  # mm/px, row\col
+(0018,0050) SliceThickness = 2.0  # mm
+(0020,0013) InstanceNumber = 1
+(0028,0010) Rows = 64
+(0028,0011) Columns = 64
+(0028,0100) BitsAllocated = 16

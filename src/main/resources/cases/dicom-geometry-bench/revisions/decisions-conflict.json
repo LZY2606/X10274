@@ -1,0 +1,13 @@
+{
+  "description": "two human decisions submitted against the same branch head",
+  "first": {
+    "action": "accept",
+    "candidateKind": "volume-joint",
+    "note": "reader A: jump is respiratory misregistration, keep one volume"
+  },
+  "second": {
+    "action": "accept",
+    "candidateKind": "volume-split",
+    "note": "reader B: jump is real table motion, split volumes"
+  }
+}

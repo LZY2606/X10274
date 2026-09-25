@@ -1,0 +1,88 @@
+{
+  "rulesV1": {
+    "version": 1,
+    "orthogonalityTolerance": 0.001,
+    "spacingToleranceMm": 0.05,
+    "duplicatePositionToleranceMm": 0.01,
+    "instanceNumberIsSpatialTruth": false
+  },
+  "principles": [
+    "InstanceNumber is never used as spatial ordering truth",
+    "orientation vectors are checked for orthonormality within tolerance before any projection",
+    "local spacing changes, duplicate positions and differing FrameOfReferenceUID produce branches, never forced merges",
+    "all legal candidates are kept when a unique decision is impossible"
+  ],
+  "scenarios": {
+    "baseline": {
+      "expectEvents": [
+        "INSTANCE_NUMBER_NOT_SPATIAL"
+      ],
+      "expectCandidates": [
+        "volume"
+      ]
+    },
+    "nonorthogonal-orientation": {
+      "expectEvents": [
+        "NONORTHOGONAL_ORIENTATION",
+        "ORIENTATION_BRANCH"
+      ],
+      "expectCandidates": [
+        "volume",
+        "volume-variant"
+      ]
+    },
+    "duplicate-position": {
+      "expectEvents": [
+        "DUPLICATE_POSITION",
+        "DUPLICATE_BRANCH"
+      ],
+      "expectCandidates": [
+        "volume",
+        "volume-variant"
+      ]
+    },
+    "spacing-jump": {
+      "expectEvents": [
+        "SPACING_JUMP",
+        "SPACING_BRANCH"
+      ],
+      "expectCandidates": [
+        "volume-joint",
+        "volume-split"
+      ]
+    },
+    "multiframe-object": {
+      "expectEvents": [
+        "MULTIFRAME_EXPANDED"
+      ],
+      "expectCandidates": [
+        "volume"
+      ]
+    },
+    "uid-conflict": {
+      "expectEvents": [
+        "UID_CONFLICT"
+      ],
+      "expectCandidates": [
+        "volume"
+      ]
+    },
+    "missing-geometry": {
+      "expectEvents": [
+        "MISSING_GEOMETRY"
+      ],
+      "expectCandidates": [
+        "volume",
+        "ungroupable"
+      ]
+    },
+    "unsupported-transfer-syntax": {
+      "expectEvents": [
+        "UNSUPPORTED_TRANSFER_SYNTAX"
+      ],
+      "expectCandidates": [
+        "excluded"
+      ]
+    }
+  }
+}

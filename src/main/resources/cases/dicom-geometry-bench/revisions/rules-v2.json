@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "orthogonalityTolerance": 0.001,
+  "spacingToleranceMm": 0.6,
+  "duplicatePositionToleranceMm": 0.01,
+  "note": "parameter revision: relax spacing tolerance so the +0.5mm jump stays in one volume"
+}
